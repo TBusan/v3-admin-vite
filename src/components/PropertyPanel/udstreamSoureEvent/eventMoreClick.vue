@@ -218,7 +218,7 @@ const saveTempData2LocalStrorage = () => {
             for (let k = 0; k < loopActionList.value.length; k++) {
               actions.push(loopActionList.value[k].actionValue)
             }
-            actionList.push({
+            actionList.push({ 
               type: actionType.value,
               pathId: controlObject.value,
               actions: actions
