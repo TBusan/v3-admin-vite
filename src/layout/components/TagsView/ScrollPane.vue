@@ -1,3 +1,19 @@
+<template>
+  <div class="scroll-container">
+    <el-icon class="arrow left" @click="scrollTo('left')">
+      <ArrowLeft />
+    </el-icon>
+    <el-scrollbar ref="scrollbarRef" @scroll="scroll">
+      <div ref="scrollbarContentRef" class="scrollbar-content">
+        <slot />
+      </div>
+    </el-scrollbar>
+    <el-icon class="arrow right" @click="scrollTo('right')">
+      <ArrowRight />
+    </el-icon>
+    <Screenfull v-if="showScreenfull" element=".app-main" openTips="内容区全屏" class="screenfull" />
+  </div>
+</template>
 <script lang="ts" setup>
 import { computed, ref } from "vue"
 import { ElScrollbar } from "element-plus"
@@ -42,23 +58,6 @@ const showScreenfull = computed(() => {
   return settingsStore.showScreenfull
 })
 </script>
-
-<template>
-  <div class="scroll-container">
-    <el-icon class="arrow left" @click="scrollTo('left')">
-      <ArrowLeft />
-    </el-icon>
-    <el-scrollbar ref="scrollbarRef" @scroll="scroll">
-      <div ref="scrollbarContentRef" class="scrollbar-content">
-        <slot />
-      </div>
-    </el-scrollbar>
-    <el-icon class="arrow right" @click="scrollTo('right')">
-      <ArrowRight />
-    </el-icon>
-    <Screenfull v-if="showScreenfull" element=".app-main" openTips="内容区全屏" class="screenfull" />
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .scroll-container {

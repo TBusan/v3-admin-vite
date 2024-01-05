@@ -3,11 +3,14 @@
     <div class="error-page-svg">
       <slot />
     </div>
-    <router-link to="/">
-      <el-button type="primary">回到首页</el-button>
-    </router-link>
+    <el-button type="primary" @click="backToPage">回到优立云世界</el-button>
   </div>
 </template>
+<script lang="ts" setup>
+const backToPage = () => {
+  window.open("https://cloud.eulee.cn/#/UdAssets/Project", "_self")
+}
+</script>
 
 <style lang="scss" scoped>
 .error-page {

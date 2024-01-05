@@ -1,8 +1,21 @@
+<template>
+  <div :class="classObj" class="app-wrapper">
+    <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleClickOutside" />
+    <Sidebar class="sidebar-container" />
+    <div :class="{ hasTagsView: showTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
+        <NavigationBar />
+        <TagsView />
+      </div>
+      <AppMain />
+    </div>
+  </div>
+</template>
 <script lang="ts" setup>
 import { computed } from "vue"
 import { useAppStore, DeviceType } from "@/store/modules/app"
 import { useSettingsStore } from "@/store/modules/settings"
-import { AppMain, NavigationBar, Settings, Sidebar, TagsView, RightPanel } from "./components"
+import { AppMain, NavigationBar, Sidebar, TagsView } from "./components"
 import useResize from "./hooks/useResize"
 
 const appStore = useAppStore()
@@ -22,9 +35,10 @@ const classObj = computed(() => {
   }
 })
 
-const showSettings = computed(() => {
-  return settingsStore.showSettings
-})
+// const showSettings = computed(() => {
+//   return settingsStore.showSettings
+// })
+
 const showTagsView = computed(() => {
   return settingsStore.showTagsView
 })
@@ -41,23 +55,6 @@ const handleClickOutside = () => {
   appStore.closeSidebar(false)
 }
 </script>
-
-<template>
-  <div :class="classObj" class="app-wrapper">
-    <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleClickOutside" />
-    <Sidebar class="sidebar-container" />
-    <div :class="{ hasTagsView: showTagsView }" class="main-container">
-      <div :class="{ 'fixed-header': fixedHeader }">
-        <NavigationBar />
-        <TagsView v-if="showTagsView" />
-      </div>
-      <AppMain />
-      <RightPanel v-if="showSettings">
-        <Settings />
-      </RightPanel>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 @import "@/styles/mixins.scss";
@@ -147,7 +144,6 @@ const handleClickOutside = () => {
       transform: translate3d(calc(0px - var(--v3-sidebar-width)), 0, 0);
     }
   }
-
   .fixed-header {
     width: 100%;
   }

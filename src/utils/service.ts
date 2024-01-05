@@ -1,8 +1,9 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios"
-import { useUserStoreHook } from "@/store/modules/user"
+import axios, { type AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from "axios"
 import { ElMessage } from "element-plus"
 import { get } from "lodash-es"
 import { getToken } from "./cache/cookies"
+import { fetchAllowList } from "@/api/axios.config"
+import includes from "lodash/includes"
 
 /** 创建请求实例 */
 function createService() {
@@ -10,13 +11,40 @@ function createService() {
   const service = axios.create()
   // 请求拦截
   service.interceptors.request.use(
-    (config) => config,
+    // (config: AxiosRequestConfig) => config,
+    (config: AxiosRequestConfig) => {
+      // 白名单校验
+      if (includes(fetchAllowList, config.url)) {
+        config.headers = {
+          "Content-Type": "multipart/form-data" 
+        }
+        return config
+      }
+      // 获取 token
+      // const info = ""
+      // // 重新登录
+      // if (!info) {
+      //   return config
+      // }
+      // const userInfo = info[SystemStoreEnum.USER_INFO]
+      const userToken = getToken()
+      if (!userToken) {
+        ElMessage.warning("用户暂时未登录！")
+        return config
+      }
+      config.headers = {
+        ...config.headers,
+        "Content-Type": "multipart/form-data" ,
+        token: userToken
+      }
+      return config
+    },
     // 发送失败
     (error) => Promise.reject(error)
   )
   // 响应拦截（可根据具体业务作出相应的调整）
   service.interceptors.response.use(
-    (response) => {
+    (response: AxiosResponse) => {
       // apiData 是 API 返回的数据
       const apiData = response.data as any
       // 这个 Code 是和后端约定的业务 Code
@@ -29,6 +57,8 @@ function createService() {
         switch (code) {
           case 0:
             // code === 0 代表没有错误
+            return apiData
+          case 1:
             return apiData
           default:
             // 不是正确的 Code
@@ -46,8 +76,9 @@ function createService() {
           break
         case 401:
           // Token 过期时，直接退出登录并强制刷新页面（会重定向到登录页）
-          useUserStoreHook().logout()
-          location.reload()
+          // useUserStoreHook().logout()
+          window.open(globleEuleeCloudLogin, "_self")
+          // location.reload()
           break
         case 403:
           error.message = "拒绝访问"

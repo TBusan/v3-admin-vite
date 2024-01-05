@@ -1,3 +1,13 @@
+<template>
+  <div class="handle-button" @click="show = true">
+    <el-icon :size="24">
+      <Setting />
+    </el-icon>
+  </div>
+  <el-drawer v-model="show" size="300px" :with-header="false">
+    <slot />
+  </el-drawer>
+</template>
 <script lang="ts" setup>
 import { ref } from "vue"
 import { Setting } from "@element-plus/icons-vue"
@@ -12,17 +22,6 @@ const props = defineProps({
 const buttonTopCss = props.buttonTop + "px"
 const show = ref(false)
 </script>
-
-<template>
-  <div class="handle-button" @click="show = true">
-    <el-icon :size="24">
-      <Setting />
-    </el-icon>
-  </div>
-  <el-drawer v-model="show" size="300px" :with-header="false">
-    <slot />
-  </el-drawer>
-</template>
 
 <style lang="scss" scoped>
 .handle-button {

@@ -1,0 +1,129 @@
+/*!
+ * Vue.js v2.7.14
+ * (c) 2014-2022 Evan You
+ * Released under the MIT License.
+ */
+
+/*!
+ * vuex v3.6.2
+ * (c) 2021 Evan You
+ * @license MIT
+ */
+
+/*! showdown v 1.9.1 - 02-11-2019 */
+
+//!
+
+//!   count++;
+
+//! @param defaultValue {bool} The value to return if the metadata item isn't in the node or if it isn't of a boolean type.
+
+//! @param defaultValue {number} The value to return if the metadata item isn't in the node or if it isn't of a 64-bit floating point number.
+
+//! @param defaultValue {number} The value to return if the metadata item isn't in the node or if it isn't of a 64-bit integer type.
+
+//! @param defaultValue {number} The value to return if the metadata item isn't in the node or if it isn't of an integer type.
+
+//! @param defaultValue {number} The value to return if the metadata item isn't in the node or if it isn't of an unsigned integer type.
+
+//! @param defaultValue {string} The value to return if the metadata item isn't in the node or if it isn't of a string type.
+
+//! @param isVisible {bool} true if the node is visible and should be drawn in the scene
+
+//! @param key {string} The name of the metadata key.
+
+//! @param name {string} The new node URI
+
+//! @param name {string} The node name
+
+//! @param value {bool} The value to write to the metadata key
+
+//! @param value {number} The value to write to the metadata key
+
+//! @param value {string} The value to write to the metadata key
+
+//! @return {bool} true if the node is visible and should be drawn in the scene
+
+//! @return {number} A code representing the geometry type. See udScene.h to interpret this code.
+
+//! @return {number} The id of the node type, see udSceneNodeType for more information.
+
+//! @return {number} The metadata value
+
+//! @return {number} UTC time
+
+//! @return {string} The ID as a string
+
+//! @return {string} The id of the node type, see udSceneNodeType for more information.
+
+//! @return {string} The node URI
+
+//! @return {udSDKJS_ProjectNode} null if there are no children, child node otherwise
+
+//! @return {udSDKJS_ProjectNode} null if there is no next sibling, sibling node otherwise
+
+//! @return {udSDKJS_ProjectNode} null if this node is the project root, parent node otherwise
+
+//! Get a metadata item of the node as a 64-bit floating point number.
+
+//! Get a metadata item of the node as a 64-bit integer.
+
+//! Get a metadata item of the node as a boolean.
+
+//! Get a metadata item of the node as a string.
+
+//! Get a metadata item of the node as an integer.
+
+//! Get a metadata item of the node as an unsigned integer.
+
+//! Get the URI of this node.
+
+//! Get the first child of this node.
+
+//! Get the last time this node was updated.
+
+//! Get the next sibling of this node.
+
+//! Get the node UUID.
+
+//! Get the node parent.
+
+//! Get the node visibliity flag.
+
+//! Get the type of this node.
+
+//! Iteration helper.
+
+//! Iteration helpers
+
+//! Retrieve the geometry type of the node
+
+//! Set a metadata item of the node as a 64-bit integer.
+
+//! Set a metadata item of the node as a bool.
+
+//! Set a metadata item of the node as a double.
+
+//! Set a metadata item of the node as an integer.
+
+//! Set a metadata item of the node as an unsigned integer.
+
+//! Set a metadata item of the node from a string.
+
+//! Set the name of this node.
+
+//! Set the node visibliity flag.
+
+//! let child: ProjectNode = null;
+
+//! let count = 0;
+
+//! let iter = this.children();
+
+//! let rootNode = udSDKJS_GetProjectRoot();
+
+//! rootNode.forEachChild((child) => { count++; });
+
+//! while ((child = iter.next().value) != null) {
+
+//! }

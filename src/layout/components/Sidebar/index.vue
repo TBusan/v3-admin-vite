@@ -1,63 +1,54 @@
+<template>
+  <div :class="{ 'has-logo': showSidebarLogo }">
+    <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <split-panel
+        direction="column"
+        :min="20"
+        :max="80"
+        :triggerLength="20"
+        :paneLengthPercent="paneLengthPercent"
+        @updatePaneLengthPercent="updatePaneLengthPercent"
+      >
+        <template v-slot:one>
+          <page-item/>
+        </template>
+        <template v-slot:two>
+          <layer-item />
+        </template>
+      </split-panel>
+    </el-scrollbar>
+  </div>
+</template>
 <script lang="ts" setup>
-import { computed } from "vue"
-import { useRoute } from "vue-router"
+import { computed, ref } from "vue"
 import { storeToRefs } from "pinia"
 import { useAppStore } from "@/store/modules/app"
-import { usePermissionStore } from "@/store/modules/permission"
 import { useSettingsStore } from "@/store/modules/settings"
-import SidebarItem from "./SidebarItem.vue"
+
+//组件
+import LayerItem from "./LayerItem_new.vue"
+import PageItem from "./PageItem.vue"
 import SidebarLogo from "./SidebarLogo.vue"
-import { getCssVariableValue } from "@/utils"
+import SplitPanel from "@/components/SplitPanel/index.vue"
 
-const v3SidebarMenuBgColor = getCssVariableValue("--v3-sidebar-menu-bg-color")
-const v3SidebarMenuTextColor = getCssVariableValue("--v3-sidebar-menu-text-color")
-const v3SidebarMenuActiveTextColor = getCssVariableValue("--v3-sidebar-menu-active-text-color")
-
-const route = useRoute()
 const appStore = useAppStore()
-const permissionStore = usePermissionStore()
+
 const settingsStore = useSettingsStore()
 
 const { showSidebarLogo } = storeToRefs(settingsStore)
 
-const activeMenu = computed(() => {
-  const { meta, path } = route
-  if (meta?.activeMenu) {
-    return meta.activeMenu
-  }
-  return path
-})
+const paneLengthPercent = ref(30)
+
+const updatePaneLengthPercent = (params: number) => {
+  console.log("dddd")
+  paneLengthPercent.value = params
+}
 
 const isCollapse = computed(() => {
   return !appStore.sidebar.opened
 })
 </script>
-
-<template>
-  <div :class="{ 'has-logo': showSidebarLogo }">
-    <SidebarLogo v-if="showSidebarLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
-        :default-active="activeMenu"
-        :collapse="isCollapse"
-        :background-color="v3SidebarMenuBgColor"
-        :text-color="v3SidebarMenuTextColor"
-        :active-text-color="v3SidebarMenuActiveTextColor"
-        :unique-opened="true"
-        :collapse-transition="false"
-        mode="vertical"
-      >
-        <SidebarItem
-          v-for="route in permissionStore.routes"
-          :key="route.path"
-          :item="route"
-          :base-path="route.path"
-          :is-collapse="isCollapse"
-        />
-      </el-menu>
-    </el-scrollbar>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 @mixin tip-line {
@@ -83,8 +74,10 @@ const isCollapse = computed(() => {
   :deep(.scrollbar-wrapper) {
     // 限制水平宽度
     overflow-x: hidden !important;
+    overflow-y: hidden !important;
     .el-scrollbar__view {
       height: 100%;
+      overflow-y: hidden !important;
     }
   }
   // 滚动条
@@ -132,5 +125,19 @@ const isCollapse = computed(() => {
       }
     }
   }
+}
+
+.box-card-top {
+  // height: 40%;
+}
+
+.box-card-down {
+  // height: 60%;
+}
+.card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

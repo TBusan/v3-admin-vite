@@ -1,6 +1,7 @@
 import { type RouteRecordRaw, createRouter, createWebHashHistory, createWebHistory } from "vue-router"
 
 const Layout = () => import("@/layout/index.vue")
+const Dashboard = () => import("@/views/dashboard/index.vue")
 
 /** 常驻路由 */
 export const constantRoutes: RouteRecordRaw[] = [
@@ -40,22 +41,44 @@ export const constantRoutes: RouteRecordRaw[] = [
     }
   },
   {
+    path: "/preview/:projectId",
+    name: "Preview",
+    component: () => import("@/views/preview/index.vue")
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",
     children: [
       {
-        path: "dashboard",
-        component: () => import("@/views/dashboard/index.vue"),
+        path: "dashboard/:projectId",
+        component: Dashboard,
         name: "Dashboard",
         meta: {
-          title: "首页",
+          title: "场景编辑器",
           svgIcon: "dashboard",
           affix: true
         }
       }
     ]
   },
+  // {
+  //   path: "/",
+  //   component: Layout,
+  //   redirect: "/dashboard",
+  //   children: [
+  //     {
+  //       path: "dashboard/:projectId",
+  //       component: () => import("@/views/dashboard/index.vue"),
+  //       name: "Dashboard",
+  //       meta: {
+  //         title: "场景编辑器",
+  //         svgIcon: "dashboard",
+  //         affix: true
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/unocss",
     component: Layout,
@@ -68,138 +91,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "unocss",
           svgIcon: "unocss"
-        }
-      }
-    ]
-  },
-  {
-    path: "/link",
-    component: Layout,
-    children: [
-      {
-        path: "https://juejin.cn/post/7089377403717287972",
-        component: () => {},
-        name: "Link",
-        meta: {
-          title: "外链",
-          svgIcon: "link"
-        }
-      }
-    ]
-  },
-  {
-    path: "/table",
-    component: Layout,
-    redirect: "/table/element-plus",
-    name: "Table",
-    meta: {
-      title: "表格",
-      elIcon: "Grid"
-    },
-    children: [
-      {
-        path: "element-plus",
-        component: () => import("@/views/table/element-plus/index.vue"),
-        name: "ElementPlus",
-        meta: {
-          title: "Element Plus"
-        }
-      },
-      {
-        path: "vxe-table",
-        component: () => import("@/views/table/vxe-table/index.vue"),
-        name: "VxeTable",
-        meta: {
-          title: "Vxe Table"
-        }
-      }
-    ]
-  },
-  {
-    path: "/menu",
-    component: Layout,
-    redirect: "/menu/menu1",
-    name: "Menu",
-    meta: {
-      title: "多级菜单",
-      svgIcon: "menu"
-    },
-    children: [
-      {
-        path: "menu1",
-        component: () => import("@/views/menu/menu1/index.vue"),
-        redirect: "/menu/menu1/menu1-1",
-        name: "Menu1",
-        meta: {
-          title: "menu1"
-        },
-        children: [
-          {
-            path: "menu1-1",
-            component: () => import("@/views/menu/menu1/menu1-1/index.vue"),
-            name: "Menu1-1",
-            meta: {
-              title: "menu1-1"
-            }
-          },
-          {
-            path: "menu1-2",
-            component: () => import("@/views/menu/menu1/menu1-2/index.vue"),
-            redirect: "/menu/menu1/menu1-2/menu1-2-1",
-            name: "Menu1-2",
-            meta: {
-              title: "menu1-2"
-            },
-            children: [
-              {
-                path: "menu1-2-1",
-                component: () => import("@/views/menu/menu1/menu1-2/menu1-2-1/index.vue"),
-                name: "Menu1-2-1",
-                meta: {
-                  title: "menu1-2-1"
-                }
-              },
-              {
-                path: "menu1-2-2",
-                component: () => import("@/views/menu/menu1/menu1-2/menu1-2-2/index.vue"),
-                name: "Menu1-2-2",
-                meta: {
-                  title: "menu1-2-2"
-                }
-              }
-            ]
-          },
-          {
-            path: "menu1-3",
-            component: () => import("@/views/menu/menu1/menu1-3/index.vue"),
-            name: "Menu1-3",
-            meta: {
-              title: "menu1-3"
-            }
-          }
-        ]
-      },
-      {
-        path: "menu2",
-        component: () => import("@/views/menu/menu2/index.vue"),
-        name: "Menu2",
-        meta: {
-          title: "menu2"
-        }
-      }
-    ]
-  },
-  {
-    path: "/select",
-    component: Layout,
-    children: [
-      {
-        path: "",
-        component: () => import("@/views/select/index.vue"),
-        name: "Select",
-        meta: {
-          title: "下拉框",
-          svgIcon: "component"
         }
       }
     ]

@@ -12,21 +12,22 @@ export type ThemeName = "normal" | "dark" | "dark-blue"
 /** 主题列表 */
 const themeList: IThemeList[] = [
   {
-    title: "默认",
+    title: "白色",
     name: "normal"
   },
   {
-    title: "黑暗",
+    title: "默认",
     name: "dark"
   },
   {
-    title: "深蓝",
+    title: "优立蓝",
     name: "dark-blue"
   }
 ]
 
 /** 正在应用的主题名称 */
-const activeThemeName = ref<ThemeName>(getActiveThemeName() || "normal")
+// const activeThemeName = ref<ThemeName>(getActiveThemeName() || "normal")
+const activeThemeName = ref<ThemeName>(getActiveThemeName() || "dark")
 
 const initTheme = () => {
   setHtmlClassName(activeThemeName.value)

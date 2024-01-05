@@ -25,7 +25,7 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
       /** 设置 host: true 才可以使用 Network 的形式，以 IP 访问项目 */
       host: true, // host: "0.0.0.0"
       /** 端口号 */
-      port: 3333,
+      port: 8090,
       /** 是否自动打开浏览器 */
       open: false,
       /** 跨域设置允许 */
@@ -34,13 +34,19 @@ export default (configEnv: ConfigEnv): UserConfigExport => {
       strictPort: false,
       /** 接口代理 */
       proxy: {
-        "/api/v1": {
-          target: "https://mock.mengxuegu.com/mock/63218b5fb4c53348ed2bc212/api/v1",
-          ws: true,
+        "/api/": {
+          // target: "https://cloud.eulee.cn/modelset/api/",
+          target: "http://dev03.eulee.local/api/",   //公司测试地址1
+          // target:"https://dev03.eulee.local:6002/server/api",   //公司测试地址2
+          // ws: true,
           /** 是否允许跨域 */
           changeOrigin: true,
-          rewrite: (path) => path.replace("/api/v1", "")
+          rewrite: (path) => path.replace("/api/", "")
         }
+      },
+      headers: {
+        "Cross-Origin-Embedder-Policy": "require-corp",
+        "Cross-Origin-Opener-Policy": "same-origin"
       }
     },
     build: {

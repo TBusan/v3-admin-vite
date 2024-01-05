@@ -5,9 +5,10 @@ import { usePermissionStore } from "./permission"
 import { getToken, removeToken, setToken } from "@/utils/cache/cookies"
 import router, { resetRouter } from "@/router"
 import { type ILoginData, loginApi, getUserInfoApi } from "@/api/login"
+
 import { type RouteRecordRaw } from "vue-router"
 
-export const useUserStore = defineStore("user", () => {
+export const useUserStore = defineStore("user", async () => {
   const token = ref<string>(getToken() || "")
   const roles = ref<string[]>([])
   const username = ref<string>("")
@@ -16,6 +17,7 @@ export const useUserStore = defineStore("user", () => {
   const setRoles = (value: string[]) => {
     roles.value = value
   }
+
   /** 登录 */
   const login = (loginData: ILoginData) => {
     return new Promise((resolve, reject) => {
@@ -75,7 +77,11 @@ export const useUserStore = defineStore("user", () => {
     roles.value = []
   }
 
-  return { token, roles, username, setRoles, login, getInfo, changeRoles, logout, resetToken }
+  const openEuleeLogin = () => {
+    window.open(globleEuleeCloudLogin, "_self")
+  }
+
+  return { token, roles, username, setRoles, login, getInfo, changeRoles, logout, resetToken, openEuleeLogin }
 })
 
 /** 在 setup 外使用 */

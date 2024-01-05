@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+
+<title>udStream</title>
+<style>
+	html, body {
+		width: 100%;
+		height: 100%;
+		margin: 0px;
+		border: 0;
+		overflow: hidden; /*  Disable scrollbars */
+		display: block;  /* No floating content on sides */
+	}
+</style>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="app.js"></script>
+	<script>
+		var euclideon = {};
+		(function (euclideon) {
+			// Public methods
+			euclideon.login = function (apikey, callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function () {
+						callback();
+						Module.removeFunction(callbackPtr);
+					}, 'v');
+				}
+				Module.ccall('vcJavascriptHooks_Login', null, ['string', 'int'], [apikey, callbackPtr]);
+			};
+			euclideon.createProject = function (callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function (projectPtr) {
+						callback(projectPtr);
+						Module.removeFunction(callbackPtr);
+					}, 'vi');
+				}
+				Module.ccall('vcJavascriptHooks_CreateProject', null, ['int'], [callbackPtr]);
+			};
+			euclideon.loadUds = function (url, callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function () {
+						callback();
+						Module.removeFunction(callbackPtr);
+					}, 'v');
+				}
+				Module.ccall('vcJavascriptHooks_LoadFile', null, ['string', 'int'], [url, callbackPtr]);
+			};
+			euclideon.moveTo = function (x, y, z, speed, callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function () {
+						callback();
+						Module.removeFunction(callbackPtr);
+					}, 'v');
+				}
+				Module.ccall('vcJavascriptHooks_MoveTo', null, ['number', 'number', 'number', 'number', 'int'], [x, y, z, speed, callbackPtr]);
+			};
+			euclideon.addPoint = function (x, y, z, name, callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function () {
+						callback();
+						Module.removeFunction(callbackPtr);
+					}, 'v');
+				}
+				Module.ccall('vcJavascriptHooks_AddPoint', null, ['number', 'number', 'number', 'string', 'int'], [x, y, z, name, callbackPtr]);
+			};
+			euclideon.registerMouse3DPosCallback = function (callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function (x, y, z) {
+						callback(x, y, z);
+					}, 'vddd');
+				}
+				Module.ccall('vcJavascriptHooks_SetMouse3DPosCallback', null, ['int'], [callbackPtr]);
+			};
+			euclideon.setNodeVisibility = function (uuid, visibility, callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function (visibility) {
+						callback(visibility != 0);
+					}, 'vi');
+				}
+				Module.ccall('vcJavascriptHooks_SetNodeVisibility', null, ['string', 'int', 'int'], [uuid, visibility ? 1 : 0, callbackPtr]);
+			};
+			euclideon.toggleNodeVisibility = function (uuid, callback) {
+				var callbackPtr = 0;
+				if (callback) {
+					callbackPtr = Module.addFunction(function (visibility) {
+						callback(visibility != 0);
+					}, 'vi');
+				}
+				Module.ccall('vcJavascriptHooks_ToggleNodeVisibility', null, ['string', 'int'], [uuid, callbackPtr]);
+			};
+		}(euclideon || {}));
+	</script>
+</body>
+</html>

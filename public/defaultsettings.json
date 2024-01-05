@@ -1,0 +1,37 @@
+{
+  "uiLevel": 1,
+  "uiScale": 1.0,
+  "showEuclideonLogo": false,
+  "login": {
+    "serverURL": "https://udstream.eulee.cn",
+    "username": "",
+    "password": "",
+    "proxy": "",
+    "useragent": "",
+    "ignoreCertificateErrors": false,
+    "proxyRequiresAuth": false,
+    "rememberProxyUsername": false
+  },
+  "skybox": {
+    "type": 3,
+    "colour": [0.39, 0.58, 0.66, 1.0],
+    "exposure": 20,
+    "timeOfDay": 12.0,
+    "month": 3.0,
+    "keepSameTime": true,
+    "uselivetime": false
+  },
+  "prepareScence": false,
+  "maptiles": {
+    "enabled": false,
+    "demEnabled": false,
+    "DEMServerURL": "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer/tile/{0}/{2}/{1}",
+    "DEMMaxLevels": 16,
+    "mapQuality": 2,
+    "mapOptions": 0,
+    "keepAboveSurface": false
+  },
+  "defaultEpsg": 0,
+  "info": "",
+  "perfQualityRatio": 1
+}
