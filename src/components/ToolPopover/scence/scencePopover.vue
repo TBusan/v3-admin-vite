@@ -121,8 +121,8 @@ const govSelectChange = (option: string) => {
   formData.append("page", "1")
   formData.append("pagesize", "2000")
   formData.append("parent_id", "0")
-  formData.append("ftype", "1")
-  // formData.append("ftype_cata1", "2")
+  // formData.append("ftype", "1")
+  formData.append("ftype_cata1", "2")
   
     //找到对应的group_id
   let findIndex = spaceOptions.value.findIndex((item) => {
@@ -167,8 +167,8 @@ const breadItemHandle = (params: any) => {
   formData.append("page", "1")
   formData.append("pagesize", "2000")
   formData.append("parent_id", parent_id)
-  formData.append("ftype", "1")
-  // formData.append("ftype_cata1", "2")
+  // formData.append("ftype", "1")
+  formData.append("ftype_cata1", "2")
   if (group_id && group_id != "") {
     formData.append("group_id", group_id)
   }
@@ -197,8 +197,8 @@ const reloadSceneSource = (params: any) => {
   formData.append("page", "1")
   formData.append("pagesize", "2000")
   formData.append("parent_id", parent_id)
-  formData.append("ftype", "1")
-  // formData.append("ftype_cata1", "2")
+  // formData.append("ftype", "1")
+  formData.append("ftype_cata1", "2")
   if (group_id && group_id != "") {
     formData.append("group_id", group_id)
   }
@@ -246,8 +246,8 @@ onMounted(() => {
   formData.append("page", "1")
   formData.append("pagesize", "2000")
   formData.append("parent_id", "0")
-  formData.append("ftype", "1")
-  // formData.append("ftype_cata1", "2")
+  // formData.append("ftype", "1")
+  formData.append("ftype_cata1", "2")
   if (group_id && group_id != "") {
     formData.append("group_id", group_id)
   }

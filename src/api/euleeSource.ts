@@ -25,7 +25,7 @@ export function queryOrganizationListApiWithEulee() {
 }
 
 /** 查询模型数据 */
-export function queryModelListApiWithEulee(data: FormData) {
+export function queryModelListApiWithEuleeOld(data: FormData) {
   return request({
     url: "ucloud/my_models",
     method: "post",
@@ -34,7 +34,7 @@ export function queryModelListApiWithEulee(data: FormData) {
 }
 
 /**  获取场景 */
-export function fetchSceneApiWithEulee(data: FormData) {
+export function fetchSceneApiWithEuleeOld(data: FormData) {
   return request({
     url: "ucloud/my_models",
     method: "post",
@@ -43,7 +43,7 @@ export function fetchSceneApiWithEulee(data: FormData) {
 }
 
 /**  查询模型数据   新版*/
-export function queryModelListApiWithEuleeNew(data: FormData) {
+export function queryModelListApiWithEulee(data: FormData) {
   return request({
     url: "ucloud_v1/my_file_list",
     method: "post",
@@ -52,7 +52,7 @@ export function queryModelListApiWithEuleeNew(data: FormData) {
 }
 
 /**  获取场景   新版*/
-export function fetchSceneApiWithEuleeNew(data: FormData) {
+export function fetchSceneApiWithEulee(data: FormData) {
   return request({
     url: "ucloud_v1/my_file_list",
     method: "post",
